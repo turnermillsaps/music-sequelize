@@ -44,13 +44,17 @@ Artist.sync({ logging: console.log })
                     .then((res) => {
                         console.log(`Record created with id: ${res[0][0].id}`);
                         sequelize.close();
+                        return;
                     })
                     .catch((err) => {
                         console.error(`Error inserting record into artist table: ${err}`);
                         sequelize.close();
+                        return;
                     })
             })
     })
     .catch((err) => {
         console.error('Unable to sync with table: ' + err);
+        sequelize.close();
+        return;
     })
